@@ -1,16 +1,20 @@
-import React from 'react';
+import React from "react";
 import { Link } from 'react-router-dom';
+import { useForm } from "react-hook-form";
 
 
 const Form = () => {
 
-    function handleSubmit(e) {
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
+
+
+    function handleSubmitB(e) {
         e.preventDefault();
-        console.log('vc clicou em enviar!');
     }
 
     function myAlert() {
-        alert("Aguarde, você está sendo redirecionado...")
+    alert("Aguarde, você está sendo redirecionado...")
     };
 
     const [value, setValue] = React.useState('');
@@ -35,7 +39,7 @@ const Form = () => {
 
             <div className="container">
                 <div className="login-container">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <div>
                             <h1 className="title">Cadastre-se aqui!</h1>
                         </div>
@@ -43,11 +47,13 @@ const Form = () => {
                         <div className="name">
                             <label className="label">Nome Completo</label>
                             <input className="input-name"
+                                defaultValue="Nome Completo"
+                                {...register("nome completo")}
                                 value={value.name}
                                 type="text"
                                 onChange={onChangeName}
                                 placeholder="Digite seu nome completo aqui!"
-                                name="fullname"
+                                name="name"
                             />
                         </div>
                         <br></br>
@@ -55,6 +61,7 @@ const Form = () => {
                         <div className="curso">
                             <label className="label">Curso</label>
                             <input className="input-curso"
+                                {...register("CursoAqui", { required: true })}
                                 value={value.curso}
                                 type="text"
                                 onChange={onChangeCurso}
@@ -66,7 +73,10 @@ const Form = () => {
 
                         <div>
                             <Link to="/user">
-                                <button type="submit" className="submit" onClick={myAlert}>
+                                <button type="submit"
+                                    className="submit"
+                                    onClick={myAlert}
+                                >
                                     Enviar
                                 </button>
                             </Link>
