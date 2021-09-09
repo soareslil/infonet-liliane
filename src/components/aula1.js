@@ -53,7 +53,7 @@ const Aula1 = () => {
                         <br></br> <br></br>
                         <br></br><br></br>
                         <footer className="footer">
-                                <a align-right className="linkFooterButton" href="http://ufsb.edu.br/" target="_blanked">UFSB-OFICIAL</a>
+                                <a className="linkFooterButton" href="http://ufsb.edu.br/" target="_blanked">UFSB-OFICIAL</a>
                                 <p className="linkFooterButton">Made by Liliane Soares</p>
                         </footer>
                 </>

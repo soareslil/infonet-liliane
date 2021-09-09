@@ -1,35 +1,50 @@
-import React from "react";
+import React , { useEffect, useState }from "react";
 import { Link } from 'react-router-dom';
-import { useForm } from "react-hook-form";
+import validation from './validation';
 
+const Form = ({ submitForm }) => {
 
-const Form = () => {
+    const [values, setValues] = React.useState({
+        name: "",
+        curso: ""
+    });
 
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const [errors, setErrors] = useState({});
+    const [dataIsCorrect, setDataIsCorrect] = useState(false);
 
-
-    function handleSubmitB(e) {
-        e.preventDefault();
-    }
-
-    function myAlert() {
-    alert("Aguarde, você está sendo redirecionado...")
+    const handleChange = (event) => {
+        setValues({
+            ...values,
+            [event.target.name]: event.target.value,
+        });
     };
 
-    const [value, setValue] = React.useState('');
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        setErrors(validation(values));
+        setDataIsCorrect(true);
+        alert("Aguarde, você está sendo redirecionado...");
+    };
+
+    useEffect(() => {
+        if (Object.keys(errors).length === 0 && dataIsCorrect) submitForm(true);
+    }, [errors]);
 
     const onChangeName = event => {
         localStorage.setItem('NameLocalStorage', event.target.value);
 
-        setValue(event.target.value);
+        setValues(event.target.value);
     };
 
     const onChangeCurso = event => {
         localStorage.setItem('CursoLocalStorage', event.target.value);
 
-        setValue(event.target.value);
+        setValues(event.target.value);
     };
+
+    // function myAlert() {
+    //     alert("Aguarde, você está sendo redirecionado...")
+    //     };
 
     return (
         <div className="div-father">
@@ -39,7 +54,7 @@ const Form = () => {
 
             <div className="container">
                 <div className="login-container">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleFormSubmit}>
                         <div>
                             <h1 className="title">Cadastre-se aqui!</h1>
                         </div>
@@ -47,35 +62,36 @@ const Form = () => {
                         <div className="name">
                             <label className="label">Nome Completo</label>
                             <input className="input-name"
-                                defaultValue="Nome Completo"
-                                {...register("nome completo")}
-                                value={value.name}
-                                type="text"
-                                onChange={onChangeName}
-                                placeholder="Digite seu nome completo aqui!"
                                 name="name"
+                                type="text"
+                                value={values.name}
+                                onChange={handleChange}
+                                onChangeStorage={onChangeName}
+                                placeholder="Digite seu nome completo aqui!"
                             />
+                            {errors.name && <p className="error">{errors.name}</p>}
                         </div>
                         <br></br>
 
                         <div className="curso">
                             <label className="label">Curso</label>
                             <input className="input-curso"
-                                {...register("CursoAqui", { required: true })}
-                                value={value.curso}
-                                type="text"
-                                onChange={onChangeCurso}
-                                placeholder="Digite seu curso da UFSB aqui!"
                                 name="curso"
+                                type="text"
+                                value={values.curso}
+                                onChange={handleChange}
+                                onChangeStorage={onChangeCurso}
+                                placeholder="Digite seu curso da UFSB aqui!"
                             />
+                            {errors.curso && <p className="error">{errors.curso}</p>}
                         </div>
 
 
                         <div>
                             <Link to="/user">
-                                <button type="submit"
+                                <button type="button"
                                     className="submit"
-                                    onClick={myAlert}
+                                    onClick={handleFormSubmit}
                                 >
                                     Enviar
                                 </button>

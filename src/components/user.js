@@ -17,7 +17,7 @@ const User = () => {
     return (
         <>
             <header className="header">
-                <a align-right className="linkHeaderButton" href="http://ufsb.edu.br/" target="_blanked">UFSB-OFICIAL</a>
+                <a className="linkHeaderButton" href="http://ufsb.edu.br/" target="_blanked">UFSB-OFICIAL</a>
             </header>
 
             <form onSubmit={handleSubmit}>
