@@ -7,7 +7,7 @@
 }
 
 .header{
-  background-color: rgba(82, 82, 224, 0.363);
+  background-color: rgba(10, 125, 233, 0.658);
   padding: 7px;
   margin: none;
   display: flex;
@@ -56,7 +56,7 @@ footer{
 }
 
 .login-container{
-  background-color: rgba(95, 97, 226, 0.205);
+  background-color: rgba(212, 42, 127, 0.459);
   padding: 30px 20px;
   margin-top: 10px;
   margin-bottom: 10px;
