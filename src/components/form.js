@@ -28,7 +28,7 @@ const Form = ({ submitForm }) => {
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && dataIsCorrect) submitForm(true);
-    }, [errors]);
+    }, [dataIsCorrect, errors, submitForm]);
 
     const onChangeName = event => {
         localStorage.setItem('NameLocalStorage', event.target.value);
