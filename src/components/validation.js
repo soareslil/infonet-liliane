@@ -1,6 +1,3 @@
-import form from './form';
-
-
 const validation = (values) => {
     let errors = {};
     if(!values.name) errors.name="Nome eh obrigatorio!!";

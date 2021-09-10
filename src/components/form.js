@@ -42,9 +42,6 @@ const Form = ({ submitForm }) => {
         setValues(event.target.value);
     };
 
-    // function myAlert() {
-    //     alert("Aguarde, você está sendo redirecionado...")
-    //     };
 
     return (
         <div className="div-father">
