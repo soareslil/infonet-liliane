@@ -1,6 +1,10 @@
-import React , { useEffect, useState }from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import validation from './validation';
+import MyContext from '../contexts/contexts';
+
+
+
 
 const Form = ({ submitForm }) => {
 
@@ -8,7 +12,7 @@ const Form = ({ submitForm }) => {
         name: "",
         curso: ""
     });
-
+  
     const [errors, setErrors] = useState({});
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
 
@@ -16,6 +20,7 @@ const Form = ({ submitForm }) => {
         setValues({
             ...values,
             [event.target.name]: event.target.value,
+            [event.target.curso]: event.target.value
         });
     };
 
@@ -30,17 +35,18 @@ const Form = ({ submitForm }) => {
         if (Object.keys(errors).length === 0 && dataIsCorrect) submitForm(true);
     }, [dataIsCorrect, errors, submitForm]);
 
-    const onChangeName = event => {
-        localStorage.setItem('NameLocalStorage', event.target.value);
 
-        setValues(event.target.value);
-    };
+    // const onChangeName = event => {
+    //     localStorage.setItem('NameLocalStorage', event.target.value);
 
-    const onChangeCurso = event => {
-        localStorage.setItem('CursoLocalStorage', event.target.value);
+    //     setValues(event.target.value);
+    // };
 
-        setValues(event.target.value);
-    };
+    // const onChangeCurso = event => {
+    //     localStorage.setItem('CursoLocalStorage', event.target.value);
+
+    //     setValues(event.target.value);
+    // };
 
 
     return (
@@ -63,7 +69,6 @@ const Form = ({ submitForm }) => {
                                 type="text"
                                 value={values.name}
                                 onChange={handleChange}
-                                onChangeStorage={onChangeName}
                                 placeholder="Digite seu nome completo aqui!"
                             />
                             {errors.name && <p className="error">{errors.name}</p>}
@@ -77,7 +82,6 @@ const Form = ({ submitForm }) => {
                                 type="text"
                                 value={values.curso}
                                 onChange={handleChange}
-                                onChangeStorage={onChangeCurso}
                                 placeholder="Digite seu curso da UFSB aqui!"
                             />
                             {errors.curso && <p className="error">{errors.curso}</p>}
@@ -89,6 +93,7 @@ const Form = ({ submitForm }) => {
                                 <button type="button"
                                     className="submit"
                                     onClick={handleFormSubmit}
+
                                 >
                                     Enviar
                                 </button>
