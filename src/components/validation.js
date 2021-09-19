@@ -1,7 +1,7 @@
 const validation = (values) => {
     let errors = {};
-    if(!values.name) errors.name="Nome eh obrigatorio!!";
-    if(!values.curso) errors.curso="Curso eh obrigatorio!!";
+    if(values.name !== undefined && !values.name) errors.name = "O campo é obrigatório";    
+    if(values.curso !== undefined && !values.curso) errors.curso = "O campo é obrigatório";
     return errors;
 }
 

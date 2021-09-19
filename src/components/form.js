@@ -1,19 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
 import validation from './validation';
-import MyContext from '../contexts/contexts';
-
-
-
+import { useForm } from "react-hook-form";
+import { useHistory } from 'react-router-dom';
 
 const Form = ({ submitForm }) => {
+
+
+    const history = useHistory();
+    const { handleSubmit } = useForm();
 
     const [values, setValues] = React.useState({
         name: "",
         curso: ""
     });
-  
+
     const [errors, setErrors] = useState({});
+
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
 
     const handleChange = (event) => {
@@ -24,29 +26,27 @@ const Form = ({ submitForm }) => {
         });
     };
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setErrors(validation(values));
+    const handleFormSubmit = () => {
+        const valid = validation(values);
+        setErrors(valid);
         setDataIsCorrect(true);
-        alert("Aguarde, você está sendo redirecionado...");
     };
 
     useEffect(() => {
-        if (Object.keys(errors).length === 0 && dataIsCorrect) submitForm(true);
-    }, [dataIsCorrect, errors, submitForm]);
+        if (Object.keys(errors).length === 0 && dataIsCorrect) {
+            alert("Atenção! Você está sendo redirecionado...");
+            onSubmit();
+            submitForm(true);
+        }
+    });
 
-
-    // const onChangeName = event => {
-    //     localStorage.setItem('NameLocalStorage', event.target.value);
-
-    //     setValues(event.target.value);
-    // };
-
-    // const onChangeCurso = event => {
-    //     localStorage.setItem('CursoLocalStorage', event.target.value);
-
-    //     setValues(event.target.value);
-    // };
+    const onSubmit = (string) => {
+        history.push({
+            pathname: `/user`,
+            state: { text:  string },
+        }
+        );
+    };
 
 
     return (
@@ -57,7 +57,7 @@ const Form = ({ submitForm }) => {
 
             <div className="container">
                 <div className="login-container">
-                    <form onSubmit={handleFormSubmit}>
+                    <form onSubmit={handleSubmit(handleFormSubmit)}>
                         <div>
                             <h1 className="title">Cadastre-se aqui!</h1>
                         </div>
@@ -89,15 +89,12 @@ const Form = ({ submitForm }) => {
 
 
                         <div>
-                            <Link to="/user">
-                                <button type="button"
-                                    className="submit"
-                                    onClick={handleFormSubmit}
 
-                                >
-                                    Enviar
-                                </button>
-                            </Link>
+                            <button type="submit"
+                                className="submit">
+                                Enviar
+                            </button>
+
                         </div>
                     </form>
 
