@@ -30,7 +30,7 @@ const Aula2 = () => {
 
             <form onSubmit={handleSubmit}>
                 <div>
-                    <h1 className="title">TITULO AULA 2 AQUI </h1>
+                    <h1 className="title">MEU PROJETO EM MIDIAS DIGITAIS</h1>
                     <br></br>
 
 
