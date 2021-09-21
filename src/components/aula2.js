@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from "../providers/auth";
+
 
 const Aula2 = () => {
 
+    const { user } = useAuth();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -38,8 +41,8 @@ const Aula2 = () => {
                         <img className="logo-ufsb" alt="logo-ufsb" src="http://ufsb.edu.br/wp-content/uploads/2015/06/Assinatura-Azul-UFSB-Oficial-Vertical-RGB7.jpg"></img>
 
                         <div className="flex-container-p">
-                            <p id="name">{`Bem vindx: ${localStorage.getItem("NameLocalStorage")}`}</p>
-                            <p id="curso">{`Seu curso na UFSB é: ${localStorage.getItem("CursoLocalStorage")}`}</p>
+                            <p id="name"> Bem vindo: {user.name} </p>
+                            <p id="curso"> Seu curso na UFSB é: {user.curso} </p>
                         </div>
                     </div>
                     <br></br> <br></br>
@@ -95,7 +98,7 @@ const Aula2 = () => {
                     <p> Retrô ou Retro é um estilo cultural desatualizado ou velho, uma tendência, hábito, ou moda do passado pós-moderno global, mas que com o tempo se tornam funcionalmente ou superficialmente a norma mais uma vez. </p> <br />
 
                     <p> O estilo agora chamado de "arte retro" é um gênero de arte pop, que foi desenvolvido nos anos 1940 e 1950, em resposta a uma necessidade de negrito, os gráficos atraentes que eram fáceis de reproduzir em prensas simples disponível na época nos grandes centros. Retro arte publicitária experimentou um ressurgimento na popularidade desde o seu estilo é distinto do estilo geradas por computadores modernos. </p>
-                    <p> <b>Referências:</b> https://pt.wikipedia.org/wiki/Retr%C3%B4 </p><br/>
+                    <p> <b>Referências:</b> https://pt.wikipedia.org/wiki/Retr%C3%B4 </p><br />
 
                     <img className="logo-ufsb" alt="retro" src="https://64.media.tumblr.com/d9e5c82d73e2a976b7799c138f1d1a0d/4cedf16e6baed780-e8/s1280x1920/a161c8c4501b3855db9cf34daab36da038742a09.jpg"></img> <br />
 

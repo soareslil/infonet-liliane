@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import validation from './validation';
 import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
+import { useAuth } from "../providers/auth";
+
 
 const Form = ({ submitForm }) => {
 
@@ -14,17 +16,25 @@ const Form = ({ submitForm }) => {
         curso: ""
     });
 
+    const { setUser } = useAuth();
+
     const [errors, setErrors] = useState({});
 
     const [dataIsCorrect, setDataIsCorrect] = useState(false);
 
-    const handleChange = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
-            [event.target.curso]: event.target.value
-        });
+    const handleForm = () => {
+        localStorage.setItem("user", JSON.stringify(values));
+        setUser(values);
     };
+
+
+    // const handleChange = (event) => {
+    //     setValues({
+    //         ...values,
+    //         [event.target.name]: event.target.value,
+    //         [event.target.curso]: event.target.value
+    //     });
+    // };
 
     const handleFormSubmit = () => {
         const valid = validation(values);
@@ -68,7 +78,7 @@ const Form = ({ submitForm }) => {
                                 name="name"
                                 type="text"
                                 value={values.name}
-                                onChange={handleChange}
+                                onChange={(e)=> setValues({name: e.target.value})}
                                 placeholder="Digite seu nome completo aqui!"
                             />
                             {errors.name && <p className="error">{errors.name}</p>}
@@ -81,7 +91,7 @@ const Form = ({ submitForm }) => {
                                 name="curso"
                                 type="text"
                                 value={values.curso}
-                                onChange={handleChange}
+                                onChange={(e)=> setValues({curso: e.target.value})}
                                 placeholder="Digite seu curso da UFSB aqui!"
                             />
                             {errors.curso && <p className="error">{errors.curso}</p>}
@@ -91,7 +101,8 @@ const Form = ({ submitForm }) => {
                         <div>
 
                             <button type="submit"
-                                className="submit">
+                                className="submit"
+                                onClick={handleForm}>
                                 Enviar
                             </button>
 

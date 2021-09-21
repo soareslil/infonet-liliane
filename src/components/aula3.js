@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from "../providers/auth";
+
 
 const Aula3 = () => {
 
+    const { user } = useAuth();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -37,8 +40,8 @@ const Aula3 = () => {
                         <img className="logo-ufsb" alt="logo-ufsb" src="http://ufsb.edu.br/wp-content/uploads/2015/06/Assinatura-Azul-UFSB-Oficial-Vertical-RGB7.jpg"></img>
 
                         <div className="flex-container-p">
-                            <p id="name">{`Bem vindx: ${localStorage.getItem("NameLocalStorage")}`}</p>
-                            <p id="curso">{`Seu curso na UFSB é: ${localStorage.getItem("CursoLocalStorage")}`}</p>
+                            <p id="name"> Bem vindo: {user.name} </p>
+                            <p id="curso"> Seu curso na UFSB é: {user.curso} </p>
                         </div>
                     </div>
                     <br></br> <br></br>

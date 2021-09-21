@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
-import MyContext from '../contexts/contexts';
+import { useAuth } from "../providers/auth";
 
 const User = () => {
 
-    const { name, curso } = useContext(MyContext);
+  const { user } = useAuth();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -14,8 +14,7 @@ const User = () => {
     function myAlert() {
         alert("Aguarde, você está sendo redirecionado...")
     };
-    console.log(name);
-    console.log(curso);
+
 
 
 
@@ -30,7 +29,7 @@ const User = () => {
 
                     <h1 className="title">Você foi cadastrado com sucesso!</h1>
                     <br></br>                                 <div>
-                        {/* <h2 className="title">MEU PROJETO EM MIDIAS DIGITAIS!</h2> */}
+                       
                         <br></br>
 
                         <div className="flex-container">
@@ -39,8 +38,8 @@ const User = () => {
                             <div className="flex-container-p">
 
 
-                                <p id="name"> Bem vindo: {name} </p>
-                                <p id="curso"> Seu curso na UFSB é: {curso} </p>
+                                <p id="name"> Bem vindo: {user.name} </p>
+                                <p id="curso"> Seu curso na UFSB é: {user.curso} </p>
 
                             </div>
                         </div>
