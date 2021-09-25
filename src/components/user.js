@@ -40,7 +40,7 @@ const User = () => {
 
                                 <p id="name"> Bem vindo: {user.name} </p>
                                 <p id="curso"> Seu curso na UFSB é: {user.curso} </p>
-
+                                {console.log(user.name)}
                             </div>
                         </div>
                     </div>

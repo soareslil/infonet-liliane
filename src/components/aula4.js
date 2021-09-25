@@ -5,6 +5,10 @@ import { useAuth } from "../providers/auth";
 
 const Aula4 = () => {
 
+
+
+
+
     const { user } = useAuth();
 
     function handleSubmit(e) {
@@ -38,7 +42,7 @@ const Aula4 = () => {
 
                         <div className="flex-container-p">
                             <p id="name"> Bem vindo: {user.name} </p>
-                            <p id="curso"> Seu curso na UFSB é: {user.curso} </p>
+                            <p id="curso"> Seu curso na UFSB é: {user.curso} </p> 
                         </div>
                     </div>
                     <br></br> <br></br>

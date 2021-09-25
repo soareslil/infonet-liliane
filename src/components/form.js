@@ -18,14 +18,16 @@ const Form = ({ submitForm }) => {
 
     const { setUser } = useAuth();
 
-    const [errors, setErrors] = useState({});
-
-    const [dataIsCorrect, setDataIsCorrect] = useState(false);
-
     const handleForm = () => {
         localStorage.setItem("user", JSON.stringify(values));
         setUser(values);
     };
+
+    const [errors, setErrors] = useState({});
+
+    const [dataIsCorrect, setDataIsCorrect] = useState(false);
+
+
 
 
     // const handleChange = (event) => {
@@ -91,7 +93,7 @@ const Form = ({ submitForm }) => {
                                 name="curso"
                                 type="text"
                                 value={values.curso}
-                                onChange={(e)=> setValues({curso: e.target.value})}
+                                onChange={(e)=> setValues({...values,curso: e.target.value})}
                                 placeholder="Digite seu curso da UFSB aqui!"
                             />
                             {errors.curso && <p className="error">{errors.curso}</p>}
